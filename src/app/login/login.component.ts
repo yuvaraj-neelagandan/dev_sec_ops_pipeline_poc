@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,15 +11,15 @@ export class LoginComponent {
 
   public username : string= ""
   public password : string= ""
+  
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _snackBar: MatSnackBar) { }
     
   ngOnInit() {
   
   }
 
   public onClickLogin(){
-    console.log("onClickLogin==", this.username,"===", this.password)
     if(this.validated()){
       this.router.navigate(['/dashbaord'])
         .then(nav => {
@@ -26,9 +27,17 @@ export class LoginComponent {
         }, err => {
           console.log(err)
         });
+    }else{
+      this.showErrorMessage()
     }
   }
+
+
+  public showErrorMessage(){
+    this._snackBar.open("Wrong Username/Password", "Dismiss")
+  }
+
   public validated(){
-    return true
+    return (this.username.trim().length > 0 && this.password.trim().length > 0 && this.username == "admin" && this.password == "admin")
   }
 }
