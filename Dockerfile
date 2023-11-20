@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:20.6.1-alpine as build
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package.json /app
