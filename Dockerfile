@@ -3,8 +3,8 @@ FROM node:20.6.1-alpine as build-step
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY package.json /app
-RUN npm install
 COPY . /app
+RUN npm install
 RUN npm run build --prod
 # Stage 2
 FROM nginx:1.17.1-alpine
