@@ -1,12 +1,11 @@
-version: "1.0"
-
 services:
-  node:
-    container_name: devsecopscontainer
-    build: ./.docker/node/
+  web:
+    build:
+      context: angular
+      target: dev-envs
     ports:
       - 4200:4200
     volumes:
-      - "./:/var/www/html"
-    working_dir: /var/www/html
-    command: ng serve --host 0.0.0.0 --poll=2000
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./angular:/project
+      - /project/node_modules
