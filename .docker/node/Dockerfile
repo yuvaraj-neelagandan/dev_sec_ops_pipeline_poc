@@ -1,11 +1,13 @@
-FROM node:20.6.1-alpine as build-step
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-COPY package.json /app
-# RUN npm ci
-COPY . .
-RUN npm install
-RUN npm run build --prod
-# RUN npm start
-FROM nginx:1.17.1-alpine
-COPY --from=build-step /app/docs /usr/share/nginx/html
+FROM node:latest
+
+RUN apt-get update && apt-get install -y vim
+
+EXPOSE 4200
+
+USER node
+
+RUN mkdir /home/node/.npm-global
+ENV PATH=/home/node/.npm-global/bin:$PATH
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+
+RUN npm install -g @angular/cli@8.0.6
