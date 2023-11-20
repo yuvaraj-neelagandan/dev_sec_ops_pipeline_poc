@@ -1,55 +1,41 @@
 pipeline {
+    
     agent { label 'ec2Agent' }
     tools {nodejs "node16" }
     environment {
         NODE_ENV='production'
     }
-    
-  
     stages {
-       
        stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
-
+            def dockerHome = tool 'myDocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
+        }
 
         stage('source') {
             steps {
-               checkout scm
-               sh 'ls -la'
+                checkout scm
+                sh 'ls -la'
             }
             
         }
-        
-         stage('build') {
-             environment{
-                 NODE_ENV='StagingGitTest'
-             }
-             
-            
+        stage('Docker Build') {
+            agent any
             steps {
-             echo NODE_ENV
-            //  withCredentials([string(credentialsId: 'e8f8ff88-49e0-433a-928d-36a518cd30d6', variable: 'secver')]) {
-            //     // some block
-            //     echo secver
-            // }
-            sh 'npm install'
+                sh 'docker rm -f devsecopspoc'
+                sh 'docker build -t devsecopspoc:latest .'
+                sh 'docker run -d -it -p 4200:4200 --name devsecopspoc devsecopspoc:latest'
             }
-            
         }
-        
-        //  stage('saveArtifact') {
-        //     steps {
-        //       archiveArtifacts artifacts: '**', followSymlinks: false
-        //     }
-            
-        // }
-        
-        
-        
+        stage('Docker Push') {
+            agent any
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                sh 'docker push devsecopspoc:latest'
+                }
+            }
+        }
     }
-
     post {  
          always {  
              echo 'This will always run'  
