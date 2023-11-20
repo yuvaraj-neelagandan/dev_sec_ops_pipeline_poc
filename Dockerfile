@@ -11,11 +11,11 @@ COPY package.json package.json
 COPY . .
 # COPY . /app
 
-RUN ng build --prod
+# RUN ng build --prod
 
 # RUN npm install
 
-# RUN npm run build --prod
+RUN npm run build --prod
 
 # Stage 2
 # FROM nginx:1.17.1-alpine
