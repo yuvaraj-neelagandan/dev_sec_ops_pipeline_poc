@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:v20.9.0
 
 RUN apt-get update && apt-get install -y vim
 
@@ -10,4 +10,4 @@ RUN mkdir /home/node/.npm-global
 ENV PATH=/home/node/.npm-global/bin:$PATH
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 
-RUN npm install -g @angular/cli@8.0.6
+RUN npm install -g @angular/li@16.0.0-next.0
