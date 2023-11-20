@@ -7,5 +7,5 @@ COPY . .
 RUN npm install
 RUN npm run build
 FROM nginx:latest
-COPY --from=build /usr/local/app/dist/dev_sec_ops_pipeline_poc /usr/share/nginx/html
+COPY --from=build dist/dev_sec_ops_pipeline_poc /usr/share/nginx/html
 EXPOSE 80
