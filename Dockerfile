@@ -2,23 +2,28 @@
 
 FROM node:14.20.1-alpine as build-step
 
-RUN mkdir -p /app
+# RUN mkdir -p /usr/src/app
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json /app
+COPY package.json package.json
 
-COPY . /app
+COPY . .
+# COPY . /app
 
-RUN npm install
+RUN ng build --prod
 
-RUN npm run build --prod
+# RUN npm install
+
+# RUN npm run build --prod
 
 # Stage 2
-FROM nginx:1.17.1-alpine
+# FROM nginx:1.17.1-alpine
 
-COPY --from=build-step /app/dist /usr/share/nginx/html
+# COPY --from=build-step /app/dist /usr/share/nginx/html
 
+FROM nginx:alpine
+LABEL author="Yuvaraj"
+COPY --from=angular-built /usr/src/app/dist /usr/share/nginx/html
 EXPOSE 80 443
-
 CMD [ "nginx", "-g", "daemon off;" ]
