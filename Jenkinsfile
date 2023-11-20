@@ -2,12 +2,12 @@ pipeline {
     agent any
     stages {
     	stage('Initialize'){
-        steps {
-                dockerHome = tool 'myDocker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"                }
+            steps {
+                    dockerHome = tool 'myDocker'
+                    env.PATH = "${dockerHome}/bin:${env.PATH}"                }
+            }
         }
-
-         stage('Docker Build') {
+        stage('Docker Build') {
             agent any
             steps {
                 sh 'docker rm -f devsecopspoc'
@@ -16,9 +16,10 @@ pipeline {
             }
         }
         stage('Push to Docker Registry'){
-        steps {
-            withCredentials([usernamePassword(credentialsId: 'dockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {                
-            pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {                
+                    pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
+                }
             }            
         }  
     }
