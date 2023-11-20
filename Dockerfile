@@ -23,7 +23,6 @@ RUN npm run build --prod
 # COPY --from=build-step /app/dist /usr/share/nginx/html
 
 FROM nginx:1.17.1-alpine
-LABEL author="Yuvaraj"
 COPY --from=build-step /usr/src/app/dist /usr/share/nginx/html
-EXPOSE 80 443
-CMD [ "nginx", "-g", "daemon off;" ]
+# EXPOSE 80 443
+# CMD [ "nginx", "-g", "daemon off;" ]
