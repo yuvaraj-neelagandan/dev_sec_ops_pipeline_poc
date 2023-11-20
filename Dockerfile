@@ -1,7 +1,7 @@
 # Stage 1
 FROM node:20.6.1-alpine as build-step
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /app
+WORKDIR /app
 COPY package.json /app
 COPY . /app
 RUN npm install
