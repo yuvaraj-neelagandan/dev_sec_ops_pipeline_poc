@@ -13,7 +13,7 @@ COPY . .
 
 # RUN ng build --prod
 
-# RUN npm install
+RUN npm install
 
 RUN npm run build --prod
 
