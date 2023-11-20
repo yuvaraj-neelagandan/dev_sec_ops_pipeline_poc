@@ -4,7 +4,6 @@ WORKDIR /usr/src/app
 COPY package.json /app
 # RUN npm ci
 COPY . .
-RUN ng serve
-# RUN npm run build --prod
+RUN npm run build
 EXPOSE 4200
 CMD ["npm", "start"]
