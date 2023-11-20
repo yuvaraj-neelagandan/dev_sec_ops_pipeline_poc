@@ -3,7 +3,8 @@ pipeline {
     stages {
     	stage('Initialize'){
             steps {
-                     sh 'python --version'               }
+                   dockerHome = tool 'myDocker'
+                   env.PATH = "${dockerHome}/bin:${env.PATH}"                 }
             }
         stage('Docker Build') {
             agent any
