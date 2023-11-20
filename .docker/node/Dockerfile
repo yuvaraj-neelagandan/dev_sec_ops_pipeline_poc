@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y vim
 
 EXPOSE 4200
 
-USER node
+USER ubuntu
 
 RUN mkdir /home/node/.npm-global
 ENV PATH=/home/node/.npm-global/bin:$PATH
