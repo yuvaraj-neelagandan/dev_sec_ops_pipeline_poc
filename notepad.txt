@@ -1,0 +1,219 @@
+if you canot find movie please visit this link
+https://www2.hd-hub-4u.click/2023/10/12th-fail-2023-hindi.html
+
+Thanks you
+
+
+Ports
+
+netstat -ano | findstr :<PORT>
+
+netstat -ano | findstr :4200
+
+
+netstat -pna | grep 2375
+
+sudo kill $(sudo lsof -t -i:2375)
+
+
+sudo lsof -i :2375
+
+jenkins docker -1a69318506524e0f9c9d226b0c3e3512
+
+docker exec -it <mycontainer> bash
+
+docker exec -it elated_turing bash
+
+Git repo - 
+
+master - https://github.com/yuvaraj-neelagandan/dev_sec_ops_pipeline_poc
+
+
+Run Jenkins in Docker - 
+
+BlueOcean - GUI version of Jenkins
+
+1. Command - 
+docker build -t myjenkins-blueocean:2.414.2 .
+
+2. docker network create jenkins
+
+3. Run Jenkins in docker 
+
+Command Mac - 
+
+docker run --name jenkins-blueocean --restart=on-failure --detach \
+  --network jenkins --env DOCKER_HOST=tcp://docker:2376 \
+  --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 \
+  --publish 8080:8080 --publish 50000:50000 \
+  --volume jenkins-data:/var/jenkins_home \
+  --volume jenkins-docker-certs:/certs/client:ro \
+  myjenkins-blueocean:2.414.2
+
+Command Win -
+
+docker run --name jenkins-blueocean --restart=on-failure --detach `
+  --network jenkins --env DOCKER_HOST=tcp://docker:2376 `
+  --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 `
+  --volume jenkins-data:/var/jenkins_home `
+  --volume jenkins-docker-certs:/certs/client:ro `
+  --publish 8080:8080 --publish 50000:50000 myjenkins-blueocean:2.414.2
+
+ Get Password - 
+ docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
+
+2e5d67a47ed04bd9929f9ffe0dae3600
+
+
+4. Run Docker image using Jenkins - socat container - https://hub.docker.com/r/alpine/socat
+
+
+docker run -d --restart=always \
+    -p 127.0.0.3:2376:2375 \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    alpine/socat \
+    tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+
+
+
+	- find the jenkins-docker image ip address - 172.17.0.3
+
+
+Useful commands -
+
+echo "1234" > text.txt
+ls -ltr
+
+docker network ls
+docker ps
+docker exec -it jenkins-blueoccean bash - to go into docker container
+
+
+ssh -i /path/key-pair-name.pem instance-user-name@instance-public-dns-name
+
+
+ssh -i /Users/yuvarajneelagandan/Desktop/DevSecOpsPipelinePoc/DevSecOpsKey.pem ubuntu@ec2-13-53-125-36.eu-north-1.compute.amazonaws.com
+
+chmod 600 DevOpsKey.pem
+ssh -v -i DevOps.pem ubuntu@51.20.63.84
+
+ssh -v -i DevOps.pem ubuntu@51.20.74.37
+
+
+d8dd2fa90f20
+
+docker run --name jenkins -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home d8dd2fa90f20
+
+
+docker run --name jenkins -p 8080:8080 -p 50000:50000 -v /var/jenkins_home 6adc6425cd34
+
+
+docker run --name jenkins-docker --rm --detach \
+  --privileged --network jenkins --network-alias docker \
+  --env DOCKER_TLS_CERTDIR=/certs \
+  --volume jenkins-docker-certs:/certs/client \
+  --volume jenkins-data:/var/jenkins_home \
+  --publish 8080:8080 \
+  docker:dind --storage-driver overlay2
+
+docker run --name jenkins -p 8080:8080 -p 50000:50000 -v /var/jenkins_home 6adc6425cd34
+
+docker build -t devsecopspoc:latest .
+
+docker build -t hellozed:v1 .
+
+docker build -t sanjaysaini2000/angular-app .
+
+
+docker build --pull --rm -f "Dockerfile" -t devsecopspipelinepoc:latest "." 
+
+npm i @angular/cli@16.0.0-next.0
+
+docker compose up
+
+chmod 400 DevOps.pem
+ssh -i "DevOps.pem" ubuntu@ec2-51-20-63-84.eu-north-1.compute.amazonaws.com
+
+
+
+docker build -t devsecopspoc:latest .
+
+resize2fs /dev/root
+
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+docker run devsecopspoc:latest
+
+docker run -d -it -p 8080:80 --name devsecops-angular devsecopspoc:latest 
+
+docker run -d -it -p 8080:80 --name devsecops-angular devsecopspoc:latest 
+
+
+docker run --name jenkins -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home 6adc6425cd34
+
+docker run --name myjenkins -p 8080:8080 -p 50000:50000 jenkins/jenkins
+
+
+
+
+angularcontainer
+
+
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:4243 -H unix:///var/run/docker.sock
+
+
+docker login -u yuvarajneelagandan
+
+
+dckr_pat_RtN2E29V1BZRr-e2xPI3qdmIP1A
+
+
+8fa305c70ec145a9813b7cf5c8b8c232
+
+
+pipeline {
+agent any
+stages {
+    stage('Initialize'){
+        steps {
+                dockerHome = tool 'myDocker'
+                env.PATH = "${dockerHome}/bin:${env.PATH}"                }
+        }
+    stage('Push to Docker Registry'){
+        steps {
+            withCredentials([usernamePassword(credentialsId: 'dockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {                
+            pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
+            }            
+        }  
+    }
+}}
+
+
+pipeline {
+    agent any
+    stages {
+    	stage('Initialize'){
+        steps {
+                dockerHome = tool 'myDocker'
+                env.PATH = "${dockerHome}/bin:${env.PATH}"                }
+        }
+
+         stage('Docker Build') {
+            agent any
+            steps {
+                sh 'docker rm -f devsecopspoc'
+                sh 'docker build -t devsecopspoc:latest .'
+                sh 'docker run -d -it -p 4200:4200 --name devsecopspoc devsecopspoc:latest'
+            }
+        }
+        stage('Push to Docker Registry'){
+        steps {
+            withCredentials([usernamePassword(credentialsId: 'dockerHub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {                
+            pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
+            }            
+        }  
+    }
+}
+
+
